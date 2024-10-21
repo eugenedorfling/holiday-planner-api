@@ -1,6 +1,5 @@
 name: test_holiday_planner
 on:
-  # activates the workflow when there is a push or pull request on the main branch
   push:
     branches: [main]
   pull_request:
@@ -9,7 +8,13 @@ jobs:
   test_project:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-      - run: pip install -r requirements.txt # install requirements to enable GitHub run our code
-      - run: pytest . # run the unit test
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
+      - run: pip install -r requirements.txt
+      - run: pytest .
+    env:
+      POSTGRES_USER: hp_db_admin
+      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      POSTGRES_HOST: database
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: holiday_planner_db

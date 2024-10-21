@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import HelloDjangoView
+from .views import WeatherAPIView
 
 urlpatterns = [
-    path("hello/", HelloDjangoView.as_view()),
+    path("weather/", WeatherAPIView.as_view()),
 ]

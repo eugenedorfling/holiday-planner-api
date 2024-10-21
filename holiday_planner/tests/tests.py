@@ -11,7 +11,8 @@ def api_client():
 
 @pytest.mark.django_db
 @patch("holiday_planner.views.fetch_weather_data")
-def test_single_location_weather(mock_fetch_weather_data, api_client):
+@patch("geopy.Nominatim.geocode")
+def test_single_location_weather(mock_geocode, mock_fetch_weather_data, api_client):
     # Mock the weather data response
     mock_fetch_weather_data.return_value = [
         {
@@ -40,6 +41,17 @@ def test_single_location_weather(mock_fetch_weather_data, api_client):
         },
     ]
 
+    # Mock geocoding response
+    mock_geocode.return_value = type(
+        "Location",
+        (object,),
+        {
+            "latitude": -33.9249,
+            "longitude": 18.4241,
+            "address": "Cape Town, South Africa",
+        },
+    )()
+
     data = [
         {
             "place_name": "Cape Town",
@@ -58,7 +70,8 @@ def test_single_location_weather(mock_fetch_weather_data, api_client):
 
 @pytest.mark.django_db
 @patch("holiday_planner.views.fetch_weather_data")
-def test_multiple_locations_weather(mock_fetch_weather_data, api_client):
+@patch("geopy.Nominatim.geocode")
+def test_multiple_locations_weather(mock_geocode, mock_fetch_weather_data, api_client):
     # Mock the weather data response for multiple locations
     mock_fetch_weather_data.return_value = [
         {
@@ -87,6 +100,37 @@ def test_multiple_locations_weather(mock_fetch_weather_data, api_client):
         },
     ]
 
+    # Mock geocoding response
+    mock_geocode.side_effect = [
+        type(
+            "Location",
+            (object,),
+            {
+                "latitude": -34.0362,
+                "longitude": 23.0471,
+                "address": "Knysna, South Africa",
+            },
+        )(),
+        type(
+            "Location",
+            (object,),
+            {
+                "latitude": -29.0852,
+                "longitude": 26.1596,
+                "address": "Bloemfontein, South Africa",
+            },
+        )(),
+        type(
+            "Location",
+            (object,),
+            {
+                "latitude": 25.276987,
+                "longitude": 55.296249,
+                "address": "Dubai, United Arab Emirates",
+            },
+        )(),
+    ]
+
     data = [
         {"place_name": "Knysna", "start_date": "2024-10-15", "end_date": "2024-10-16"},
         {
@@ -100,7 +144,6 @@ def test_multiple_locations_weather(mock_fetch_weather_data, api_client):
     response = api_client.post("/api/weather/", data, format="json")
     assert response.status_code == 200
     response_data = response.json()
-    print(response_data)
     assert response_data[0]["place_name"] == "Knysna"
     assert response_data[1]["place_name"] == "Bloemfontein"
     assert response_data[2]["place_name"] == "Dubai"
@@ -112,8 +155,10 @@ def test_multiple_locations_weather(mock_fetch_weather_data, api_client):
 
 @pytest.mark.django_db
 @patch("holiday_planner.views.fetch_weather_data")
-def test_invalid_location(mock_fetch_weather_data, api_client):
+@patch("geopy.Nominatim.geocode")
+def test_invalid_location(mock_geocode, mock_fetch_weather_data, api_client):
     # Simulate an error response for an invalid location
+    mock_geocode.return_value = None
     mock_fetch_weather_data.side_effect = Exception("Invalid location")
 
     data = [

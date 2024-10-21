@@ -100,6 +100,42 @@ We need data models to keep track of customer schedules and their schedule desti
 ]
 ```
 
+**Response (200 OK):**
+
+```json
+[
+  {
+    "place_name": "Paris",
+    "weather_data": [
+      {
+        "date": "YYYY-MM-DD",
+        "weather_code": 80.0,
+        "weather_description": "Slight rain showers",
+        "temperature_max": 19,
+        "temperature_min": 13,
+        "uv_index_max": 2,
+        "precipitation_probability_max": 13,
+        "wind_speed_max": 16,
+        "wind_gusts_max": 33,
+        "wind_direction": 188
+      },
+      {
+        "date": "YYYY-MM-DD",
+        "weather_code": 80.0,
+        "weather_description": "Slight rain showers",
+        "temperature_max": 20,
+        "temperature_min": 13,
+        "uv_index_max": 3,
+        "precipitation_probability_max": 63,
+        "wind_speed_max": 19,
+        "wind_gusts_max": 42,
+        "wind_direction": 207
+      }
+    ]
+  }
+]
+```
+
 #### 2. Retrieve Weather Information for Multiple Locations
 
 - **URL:** /api/weather/
@@ -119,6 +155,47 @@ We need data models to keep track of customer schedules and their schedule desti
     "place_name": "London",
     "start_date": "YYYY-MM-DD",
     "end_date": "YYYY-MM-DD"
+  }
+]
+```
+
+**Response (200 OK):**
+
+```json
+[
+  {
+    "place_name": "Paris",
+    "weather_data": [
+      {
+        "date": "YYYY-MM-DD",
+        "weather_code": 80.0,
+        "weather_description": "Slight rain showers",
+        "temperature_max": 19,
+        "temperature_min": 13,
+        "uv_index_max": 2,
+        "precipitation_probability_max": 13,
+        "wind_speed_max": 16,
+        "wind_gusts_max": 33,
+        "wind_direction": 188
+      }
+    ]
+  },
+  {
+    "place_name": "London",
+    "weather_data": [
+      {
+        "date": "YYYY-MM-DD",
+        "weather_code": 61.0,
+        "weather_description": "Slight rain",
+        "temperature_max": 18,
+        "temperature_min": 11,
+        "uv_index_max": 0,
+        "precipitation_probability_max": 88,
+        "wind_speed_max": 25,
+        "wind_gusts_max": 54,
+        "wind_direction": 201
+      }
+    ]
   }
 ]
 ```
@@ -254,8 +331,8 @@ We need data models to keep track of customer schedules and their schedule desti
 5. ~~Create core django project~~
 6. ~~Create holiday_planner base app~~
 7. ~~Setup testing (pytest)~~
-8. Automate testing (github actions)
-9. Build Weather API (Third Party API)(single or multiple locations)
+8. ~~Automate testing (github actions)~~
+9. ~~Build Weather API (Third Party API)(single or multiple locations)~~
 10. Build Holiday Scheduler API (with location duration options: dates, days, distributed)
     1. Add Basic Authentication
 11. Build Schedule Weather API

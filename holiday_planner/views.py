@@ -1,9 +1,13 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status, generics
+from rest_framework import status, generics, viewsets, permissions
 from geopy import Nominatim
-from holiday_planner.models import Destination
-from holiday_planner.serializers import WeatherDataSerializer, UserSerializer
+from holiday_planner.models import Destination, HolidaySchedule
+from holiday_planner.serializers import (
+    WeatherDataSerializer,
+    UserSerializer,
+    HolidayScheduleSerializer,
+)
 from holiday_planner.weather_service import fetch_weather_data
 from django.contrib.auth.models import User
 
@@ -61,3 +65,12 @@ class UserList(generics.ListAPIView):
 class UserDetail(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+class HolidayScheduleViewSet(viewsets.ModelViewSet):
+    queryset = HolidaySchedule.objects.prefetch_related("destinations__destination")
+    serializer_class = HolidayScheduleSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)

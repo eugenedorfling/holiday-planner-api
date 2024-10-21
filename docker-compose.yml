@@ -1,0 +1,25 @@
+name: holiday_planner
+
+services:
+  app:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    restart: unless-stopped
+    depends_on:
+      - database
+    env_file:
+      - app.env
+    ports:
+      - 8000:8000
+    volumes:
+      - $PWD:/app
+
+  database:
+    image: postgres:13
+    restart: unless-stopped
+    env_file:
+      - app.env
+    volumes:
+      - ./postgress_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432

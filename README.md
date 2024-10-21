@@ -250,7 +250,7 @@ We need data models to keep track of customer schedules and their schedule desti
 1. ~~Create github repo, public~~
 2. ~~Setup git locally~~
 3. ~~Start ReadMe.md~~
-4. Setup Dev Environment (Docker)
+4. ~~Setup Dev Environment (Docker)~~
 5. Create core django project
 6. Create holiday_planner base app
 7. Setup testing (pytest)

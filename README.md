@@ -251,9 +251,9 @@ We need data models to keep track of customer schedules and their schedule desti
 2. ~~Setup git locally~~
 3. ~~Start ReadMe.md~~
 4. ~~Setup Dev Environment (Docker)~~
-5. Create core django project
-6. Create holiday_planner base app
-7. Setup testing (pytest)
+5. ~~Create core django project~~
+6. ~~Create holiday_planner base app~~
+7. ~~Setup testing (pytest)~~
 8. Automate testing (github actions)
 9. Build Weather API (Third Party API)(single or multiple locations)
 10. Build Holiday Scheduler API (with location duration options: dates, days, distributed)

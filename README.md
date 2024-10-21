@@ -31,6 +31,73 @@ The Holiday Planner API allows users to plan a holiday by selecting a series of 
 - Automatic geocoding of destination names to fetch latitude and longitude.
 - Automated tests for critical functionalities.
 
+## Technologies Used
+
+- Django and Django REST Framework: For API development and request handling.
+- PostgreSQL: As the database.
+- Docker: For environment setup and containerization.
+- Geopy: For geocoding location names into coordinates.
+- Open-Meteo Weather Forecast API : To retrieve weather data for specified locations.
+- Pytest & Github Actions: For automated testing.
+
+## Setup Instructions
+
+### Prerequisites
+
+- Docker and Docker Compose installed on your machine.
+- docker-compose is used to spin up the PostgreSQL database and Django app containers.
+
+### Steps
+
+#### 1. Clone the repository:
+
+```bash
+git clone https://github.com/eugenedorfling/holiday-planner-api
+cd holiday-planner-api
+```
+
+#### 2. Create an environment file:
+
+Rename the provided .env.example to .env and configure the environment variables:
+
+```bash
+cp .env.example app.env
+```
+
+- replace example values
+
+#### 3. Build and run the Docker containers:
+
+```bash
+docker compose up --build
+```
+
+This will set up the Django app and PostgreSQL database.
+
+#### 4. Run migrations:
+
+```bash
+docker compose exec app python manage.py migrate
+```
+
+#### 5. Create a superuser (optional for admin access):
+
+```bash
+docker compose exec app python manage.py createsuperuser
+```
+
+#### 6. Run the tests:
+
+```bash
+docker-compose exec app pytest -v
+```
+
+#### 7. Access the API:
+
+- The Weather API will be available at http://localhost:8000/api/weather/
+- The Shedules API will be available at http://localhost:8000/api/schedules/
+- Admin interface is at http://localhost:8000/admin/
+
 ## High-Level Design
 
 ### MVP User Stories
@@ -645,7 +712,20 @@ We need data models to keep track of customer schedules and their schedule desti
 
 **Response (201 Created)**
 
-## Tasks Breakdown / Progress
+## Development Process
+
+### Approach
+
+    1.	Understanding the Requirements: I started by defining user stories to shape the development scope and ensure the functionality aligned with customer needs.
+    2.	Building Core Features:
+    •	Created models for HolidaySchedule, ScheduleItem, and Destination, with flexibility for handling travel dates and lengths of stay.
+    •	Integrated geocoding using Geopy to convert place names into coordinates.
+    •	Implemented a service to fetch weather data from third-party APIs based on coordinates and travel dates.
+    3.	Iterative Development: I adopted an incremental approach, implementing one user story at a time while ensuring that each feature was tested and verified before moving on.
+    4.	Testing: For each user story, I wrote automated tests to validate API behavior (e.g., creating schedules, fetching weather data, editing, and deleting schedules).
+    5.	Time Constraints: To meet the 3-hour time limit, I focused on delivering the core functionality while making strategic decisions on simplifying certain features.
+
+### Tasks Breakdown / Progress
 
 1. ~~Create github repo, public~~
 2. ~~Setup git locally~~
@@ -659,3 +739,36 @@ We need data models to keep track of customer schedules and their schedule desti
 10. ~~Build Holiday Scheduler API (with location duration options: dates, days, distributed)~~
     1. ~~Add Basic Authentication~~
 11. Review and Improve
+
+### Time Spent on Project
+
+- 4-6 Hours over the course of last week. Researching and testing various weather APIs, geo-locating APIs, etc. to find out what is available, what is possible, what the data will look like and to decide what I will build.
+- 8 Hours building the complete project. (see task breakdown above)
+
+### Assumptions and Simplifications
+
+- Weather API: Using minimal of provided data and simplified implementation. Extension of the 16 day forecast limit can be implemented by using historical data to predict weather.
+- Dates for Destinations: Supported flexible start/end dates and length-of-stay logic. However, more complex scheduling features (like optimizing based on weather conditions) were kept simple ie. evenly spreading destination durations over the holiday duration.
+- Authentication: Basic user authentication is included, but complex user role management was omitted to streamline the scope.
+- Geocoding: Used Geopy to handle place name conversion. Advanced error handling for edge cases (e.g., ambiguous location names) was simplified.
+- Admin interface: Basic setup in place. This can be improved for easy backend management of system.
+- Data Models: Can be optimized for space, speed and readability(representation)
+
+### Bugs and Known Issues
+
+- Geocoding Failures: If a place name cannot be geocoded, the API returns an error without a retry mechanism. This can be improved by adding fallback strategies.
+- Weather Data: The API only allows for 16 days forecast. Error handling for this is not implemented.
+
+### Potential Improvements and Future Work
+
+- Optimizing Destination Orders: Future versions could allow users to reorder destinations based on real-time weather conditions.
+- Frontend Interface: A simple frontend could be built to visualize holiday plans and compare weather forecasts.
+- Admin Improvements: Enhancing the admin panel to better manage schedules and destinations.
+- Extended Date Logic: Currently, holiday schedules assume simple start/end or length-of-stay logic. Advanced scheduling (e.g., handling overlapping holidays) could be added.
+- Notifications: Get notifications on weather changes in your schedules.
+- Setting weather requirements: Finding places and dates that match weather requirements. (Not only assuming the customer wants sunny weather - ie. wind conditions & direction for a sailing holiday or ocean & surf conditions for a surf holiday)
+- weather based activity suggestions: Recommend nearby activities and experiences that align with weather conditions.
+
+### Conclusion
+
+This project was developed with a focus on delivering a minimal viable product (MVP) within a time constraint. It demonstrates an understanding of Django REST development, third-party API integration, and the use of Docker for environment management. While the core functionality is complete, there are numerous areas for future enhancement. Thank you for taking the time to evaluate this project!

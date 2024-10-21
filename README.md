@@ -227,12 +227,89 @@ We need data models to keep track of customer schedules and their schedule desti
 }
 ```
 
+**Response (201 Created):**
+
+```json
+{
+  "id": 1,
+  "user": "admin",
+  "start_date": "2024-10-25",
+  "end_date": "2024-10-26",
+  "destinations": [
+    {
+      "destination": "Paris",
+      "start_date": "2024-10-25",
+      "end_date": "2024-10-26",
+      "length_of_stay": null,
+      "weather_data": [
+        {
+          "date": "2024-10-25",
+          "uv_index_max": 2,
+          "weather_code": 3.0,
+          "wind_direction": 227,
+          "wind_gusts_max": 23,
+          "wind_speed_max": 9,
+          "temperature_max": 14,
+          "temperature_min": 8,
+          "weather_description": "Overcast",
+          "precipitation_probability_max": 28
+        },
+        {
+          "date": "2024-10-26",
+          "uv_index_max": 2,
+          "weather_code": 3.0,
+          "wind_direction": 212,
+          "wind_gusts_max": 33,
+          "wind_speed_max": 13,
+          "temperature_max": 16,
+          "temperature_min": 7,
+          "weather_description": "Overcast",
+          "precipitation_probability_max": 17
+        }
+      ]
+    },
+    {
+      "destination": "London",
+      "start_date": "2024-10-26",
+      "end_date": "2024-10-27",
+      "length_of_stay": null,
+      "weather_data": [
+        {
+          "date": "2024-10-26",
+          "uv_index_max": 1,
+          "weather_code": 61.0,
+          "wind_direction": 226,
+          "wind_gusts_max": 55,
+          "wind_speed_max": 23,
+          "temperature_max": 15,
+          "temperature_min": 10,
+          "weather_description": "Slight rain",
+          "precipitation_probability_max": 20
+        },
+        {
+          "date": "2024-10-27",
+          "uv_index_max": 2,
+          "weather_code": 80.0,
+          "wind_direction": 267,
+          "wind_gusts_max": 62,
+          "wind_speed_max": 24,
+          "temperature_max": 15,
+          "temperature_min": 9,
+          "weather_description": "Slight rain showers",
+          "precipitation_probability_max": 30
+        }
+      ]
+    }
+  ]
+}
+```
+
 **Request Body (Length of Stay per location):**
 
 ```json
 {
-  "start_date": "YYYY-MM-DD",
-  "end_date": "YYYY-MM-DD",
+  "start_date": "2024-10-20",
+  "end_date": "2024-10-24",
   "destinations_input": [
     {
       "place_name": "Paris",
@@ -246,12 +323,89 @@ We need data models to keep track of customer schedules and their schedule desti
 }
 ```
 
+**Response (201 Created):**
+
+```json
+{
+  "id": 2,
+  "user": "admin",
+  "start_date": "2024-10-20",
+  "end_date": "2024-10-24",
+  "destinations": [
+    {
+      "destination": "Paris",
+      "start_date": "2024-10-20",
+      "end_date": "2024-10-21",
+      "length_of_stay": 2,
+      "weather_data": [
+        {
+          "date": "2024-10-20",
+          "uv_index_max": 3,
+          "weather_code": 61.0,
+          "wind_direction": 219,
+          "wind_gusts_max": 41,
+          "wind_speed_max": 16,
+          "temperature_max": 20,
+          "temperature_min": 13,
+          "weather_description": "Slight rain",
+          "precipitation_probability_max": 83
+        },
+        {
+          "date": "2024-10-21",
+          "uv_index_max": 3,
+          "weather_code": 61.0,
+          "wind_direction": 295,
+          "wind_gusts_max": 25,
+          "wind_speed_max": 11,
+          "temperature_max": 17,
+          "temperature_min": 10,
+          "weather_description": "Slight rain",
+          "precipitation_probability_max": 60
+        }
+      ]
+    },
+    {
+      "destination": "London",
+      "start_date": "2024-10-21",
+      "end_date": "2024-10-22",
+      "length_of_stay": 2,
+      "weather_data": [
+        {
+          "date": "2024-10-21",
+          "uv_index_max": 2,
+          "weather_code": 3.0,
+          "wind_direction": 230,
+          "wind_gusts_max": 36,
+          "wind_speed_max": 15,
+          "temperature_max": 16,
+          "temperature_min": 9,
+          "weather_description": "Overcast",
+          "precipitation_probability_max": 10
+        },
+        {
+          "date": "2024-10-22",
+          "uv_index_max": 3,
+          "weather_code": 3.0,
+          "wind_direction": 195,
+          "wind_gusts_max": 27,
+          "wind_speed_max": 12,
+          "temperature_max": 17,
+          "temperature_min": 10,
+          "weather_description": "Overcast",
+          "precipitation_probability_max": 0
+        }
+      ]
+    }
+  ]
+}
+```
+
 **Request Body (Dynamic/Suggested dates):**
 
 ```json
 {
-  "start_date": "YYYY-MM-DD",
-  "end_date": "YYYY-MM-DD",
+  "start_date": "2024-10-20",
+  "end_date": "2024-10-21",
   "destinations_input": [
     {
       "place_name": "Paris"
@@ -263,11 +417,153 @@ We need data models to keep track of customer schedules and their schedule desti
 }
 ```
 
+**Response (201 Created):**
+
+```json
+{
+  "id": 3,
+  "user": "admin",
+  "start_date": "2024-10-20",
+  "end_date": "2024-10-21",
+  "destinations": [
+    {
+      "destination": "Paris",
+      "start_date": "2024-10-20",
+      "end_date": "2024-10-21",
+      "length_of_stay": 0,
+      "weather_data": [
+        {
+          "date": "2024-10-20",
+          "uv_index_max": 3,
+          "weather_code": 61.0,
+          "wind_direction": 219,
+          "wind_gusts_max": 41,
+          "wind_speed_max": 16,
+          "temperature_max": 20,
+          "temperature_min": 13,
+          "weather_description": "Slight rain",
+          "precipitation_probability_max": 83
+        },
+        {
+          "date": "2024-10-21",
+          "uv_index_max": 3,
+          "weather_code": 61.0,
+          "wind_direction": 295,
+          "wind_gusts_max": 25,
+          "wind_speed_max": 11,
+          "temperature_max": 17,
+          "temperature_min": 10,
+          "weather_description": "Slight rain",
+          "precipitation_probability_max": 60
+        }
+      ]
+    },
+    {
+      "destination": "London",
+      "start_date": "2024-10-21",
+      "end_date": "2024-10-21",
+      "length_of_stay": 0,
+      "weather_data": [
+        {
+          "date": "2024-10-21",
+          "uv_index_max": 2,
+          "weather_code": 3.0,
+          "wind_direction": 230,
+          "wind_gusts_max": 36,
+          "wind_speed_max": 15,
+          "temperature_max": 16,
+          "temperature_min": 9,
+          "weather_description": "Overcast",
+          "precipitation_probability_max": 10
+        }
+      ]
+    }
+  ]
+}
+```
+
 #### 4. Retrieve a Holiday Schedule
 
 - **URL:** /api/schedule/{id}/
 - **Method:** GET
 - **Description:** Retrieves the details of a specific holiday schedule by its ID.
+
+**Response (201 Created):**
+
+```json
+{
+  "id": 2,
+  "user": "admin",
+  "start_date": "2024-10-20",
+  "end_date": "2024-10-24",
+  "destinations": [
+    {
+      "destination": "Paris",
+      "start_date": "2024-10-20",
+      "end_date": "2024-10-21",
+      "length_of_stay": 2,
+      "weather_data": [
+        {
+          "date": "2024-10-20",
+          "uv_index_max": 3,
+          "weather_code": 61.0,
+          "wind_direction": 219,
+          "wind_gusts_max": 41,
+          "wind_speed_max": 16,
+          "temperature_max": 20,
+          "temperature_min": 13,
+          "weather_description": "Slight rain",
+          "precipitation_probability_max": 83
+        },
+        {
+          "date": "2024-10-21",
+          "uv_index_max": 3,
+          "weather_code": 61.0,
+          "wind_direction": 295,
+          "wind_gusts_max": 25,
+          "wind_speed_max": 11,
+          "temperature_max": 17,
+          "temperature_min": 10,
+          "weather_description": "Slight rain",
+          "precipitation_probability_max": 60
+        }
+      ]
+    },
+    {
+      "destination": "London",
+      "start_date": "2024-10-21",
+      "end_date": "2024-10-22",
+      "length_of_stay": 2,
+      "weather_data": [
+        {
+          "date": "2024-10-21",
+          "uv_index_max": 2,
+          "weather_code": 3.0,
+          "wind_direction": 230,
+          "wind_gusts_max": 36,
+          "wind_speed_max": 15,
+          "temperature_max": 16,
+          "temperature_min": 9,
+          "weather_description": "Overcast",
+          "precipitation_probability_max": 10
+        },
+        {
+          "date": "2024-10-22",
+          "uv_index_max": 3,
+          "weather_code": 3.0,
+          "wind_direction": 195,
+          "wind_gusts_max": 27,
+          "wind_speed_max": 12,
+          "temperature_max": 17,
+          "temperature_min": 10,
+          "weather_description": "Overcast",
+          "precipitation_probability_max": 0
+        }
+      ]
+    }
+  ]
+}
+```
 
 #### 5. Update a Holiday Schedule
 
@@ -279,38 +575,63 @@ We need data models to keep track of customer schedules and their schedule desti
 
 ```json
 {
-  "start_date": "YYYY-MM-DD",
-  "end_date": "YYYY-MM-DD",
+  "start_date": "2024-10-17",
+  "end_date": "2024-10-19",
   "destinations_input": [
     {
       "place_name": "Berlin",
-      "start_date": "YYYY-MM-DD",
-      "end_date": "YYYY-MM-DD"
+      "start_date": "2024-10-17",
+      "end_date": "2024-10-18"
     },
     {
       "place_name": "Amsterdam",
-      "start_date": "YYYY-MM-DD",
-      "end_date": "YYYY-MM-DD"
+      "start_date": "2024-10-18",
+      "end_date": "2024-10-19"
     }
   ]
 }
 ```
 
-#### 6. Partial Update a Holiday Schedule
-
-- **URL:** /api/schedule/{id}/
-- **Method:** PATCH
-- **Description:** Updates specific fields of a schedule. Only the fields provided in the request body will be updated.
-
-**Request Body:**
+**Response (201 Created):**
 
 ```json
 {
-  "end_date": "YYYY-MM-DD",
-  "destinations_input": [
+  "id": 3,
+  "user": "admin",
+  "start_date": "2024-10-20",
+  "end_date": "2024-10-22",
+  "destinations": [
     {
-      "place_name": "Madrid",
-      "length_of_stay": 2
+      "destination": "Madrid",
+      "start_date": "2024-10-21",
+      "end_date": "2024-10-22",
+      "length_of_stay": null,
+      "weather_data": [
+        {
+          "date": "2024-10-20",
+          "uv_index_max": 4,
+          "weather_code": 45.0,
+          "wind_direction": 44,
+          "wind_gusts_max": 14,
+          "wind_speed_max": 5,
+          "temperature_max": 23,
+          "temperature_min": 11,
+          "weather_description": "Fog",
+          "precipitation_probability_max": 0
+        },
+        {
+          "date": "2024-10-21",
+          "uv_index_max": 4,
+          "weather_code": 3.0,
+          "wind_direction": 41,
+          "wind_gusts_max": 33,
+          "wind_speed_max": 13,
+          "temperature_max": 21,
+          "temperature_min": 14,
+          "weather_description": "Overcast",
+          "precipitation_probability_max": 8
+        }
+      ]
     }
   ]
 }
@@ -321,6 +642,8 @@ We need data models to keep track of customer schedules and their schedule desti
 - **URL:** /api/schdule/{id}/
 - **Method:** DELETE
 - **Description:** Deletes a holiday schedule by its ID.
+
+**Response (201 Created)**
 
 ## Tasks Breakdown / Progress
 
@@ -333,7 +656,6 @@ We need data models to keep track of customer schedules and their schedule desti
 7. ~~Setup testing (pytest)~~
 8. ~~Automate testing (github actions)~~
 9. ~~Build Weather API (Third Party API)(single or multiple locations)~~
-10. Build Holiday Scheduler API (with location duration options: dates, days, distributed)
-    1. Add Basic Authentication
-11. Build Schedule Weather API
-12. Review and Improve
+10. ~~Build Holiday Scheduler API (with location duration options: dates, days, distributed)~~
+    1. ~~Add Basic Authentication~~
+11. Review and Improve

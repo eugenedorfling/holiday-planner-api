@@ -165,3 +165,6 @@ cython_debug/
 
 #Database Docker Mount Ignore
 postgress_data
+
+#Chache
+.cache.sqlite

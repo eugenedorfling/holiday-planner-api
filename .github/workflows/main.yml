@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: postgres/postgresql-action@v3
+      - uses: dentarg/postgres@1.4.0
         with:
           database: ${{ secrets.POSTGRES_DB }}
           username: ${{ secrets.POSTGRES_USER }}

@@ -1,10 +1,11 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, generics
 from geopy import Nominatim
 from holiday_planner.models import Destination
-from holiday_planner.serializers import WeatherDataSerializer
+from holiday_planner.serializers import WeatherDataSerializer, UserSerializer
 from holiday_planner.weather_service import fetch_weather_data
+from django.contrib.auth.models import User
 
 
 class WeatherAPIView(APIView):
@@ -50,3 +51,13 @@ class WeatherAPIView(APIView):
                 )
 
         return Response(weather_results)
+
+
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

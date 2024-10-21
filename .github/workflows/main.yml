@@ -1,20 +1,23 @@
 name: test_holiday_planner
+
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
+
 jobs:
   test_project:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: postgres/postgresql-action@v3
+        with:
+          database: ${{ secrets.POSTGRES_DB }}
+          username: ${{ secrets.POSTGRES_USER }}
+          password: ${{ secrets.POSTGRES_PASSWORD }}
       - uses: actions/setup-python@v3
       - run: pip install -r requirements.txt
       - run: pytest .
     env:
-      POSTGRES_USER: hp_db_admin
-      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-      POSTGRES_HOST: database
-      POSTGRES_PORT: 5432
-      POSTGRES_DB: holiday_planner_db
+      DJANGO_SETTINGS_MODULE: holiday_planner.settings

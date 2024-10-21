@@ -269,7 +269,7 @@ We need data models to keep track of customer schedules and their schedule desti
 
 #### 3. Create a Holiday Schedule
 
-- **URL:** /api/schedule/
+- **URL:** /api/schedules/
 - **Method:** POST
 - **Description:** Creates a new holiday schedule with a list of destinations and relative weather data. Destinations can include specific start/end dates or a length of stay at each location. Only `place_name` is required to allow for dynamic or suggested schedules.
 
@@ -551,7 +551,7 @@ We need data models to keep track of customer schedules and their schedule desti
 
 #### 4. Retrieve a Holiday Schedule
 
-- **URL:** /api/schedule/{id}/
+- **URL:** /api/schedules/{id}/
 - **Method:** GET
 - **Description:** Retrieves the details of a specific holiday schedule by its ID.
 
@@ -634,7 +634,7 @@ We need data models to keep track of customer schedules and their schedule desti
 
 #### 5. Update a Holiday Schedule
 
-- **URL:** /api/schedule/{id}/
+- **URL:** /api/schedules/{id}/
 - **Method:** PUT
 - **Description:** Replaces the existing schedule with a new one. All fields must be provided.
 
@@ -706,7 +706,7 @@ We need data models to keep track of customer schedules and their schedule desti
 
 #### 7. Delete a Holiday Schedule
 
-- **URL:** /api/schdule/{id}/
+- **URL:** /api/schdules/{id}/
 - **Method:** DELETE
 - **Description:** Deletes a holiday schedule by its ID.
 
@@ -716,14 +716,14 @@ We need data models to keep track of customer schedules and their schedule desti
 
 ### Approach
 
-    1.	Understanding the Requirements: I started by defining user stories to shape the development scope and ensure the functionality aligned with customer needs.
-    2.	Building Core Features:
-    •	Created models for HolidaySchedule, ScheduleItem, and Destination, with flexibility for handling travel dates and lengths of stay.
-    •	Integrated geocoding using Geopy to convert place names into coordinates.
-    •	Implemented a service to fetch weather data from third-party APIs based on coordinates and travel dates.
-    3.	Iterative Development: I adopted an incremental approach, implementing one user story at a time while ensuring that each feature was tested and verified before moving on.
-    4.	Testing: For each user story, I wrote automated tests to validate API behavior (e.g., creating schedules, fetching weather data, editing, and deleting schedules).
-    5.	Time Constraints: To meet the 3-hour time limit, I focused on delivering the core functionality while making strategic decisions on simplifying certain features.
+1. Understanding the Requirements: I started by defining user stories to shape the development scope and ensure the functionality aligned with customer needs.
+2. Building Core Features:
+   - Created models for HolidaySchedule, ScheduleItem, and Destination, with flexibility for handling travel dates and lengths of stay.
+   - Integrated geocoding using Geopy to convert place names into coordinates.
+   - Implemented a service to fetch weather data from third-party APIs based on coordinates and travel dates.
+3. Iterative Development: I adopted an incremental approach, implementing one user story at a time while ensuring that each feature was tested and verified before moving on.
+4. Testing: For each user story, I wrote automated tests to validate API behavior (e.g., creating schedules, fetching weather data, editing, and deleting schedules).
+5. Time Constraints: I focused on delivering the core functionality while making strategic decisions on simplifying certain features.
 
 ### Tasks Breakdown / Progress
 
